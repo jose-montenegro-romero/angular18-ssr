@@ -1,5 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   InputSignal,
@@ -12,6 +13,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-card-detail',
   standalone: true,
   imports: [CommonModule, RouterLink, NgOptimizedImage],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card-detail.component.html',
   styleUrl: './card-detail.component.scss',
 })

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
@@ -20,6 +21,7 @@ import { CardComponent } from '../../shared/components/card/card.component';
   selector: 'app-home-detail',
   standalone: true,
   imports: [CommonModule, CardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home-detail.component.html',
   styleUrl: './home-detail.component.scss',
 })

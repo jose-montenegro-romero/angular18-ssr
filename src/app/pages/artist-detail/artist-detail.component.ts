@@ -3,7 +3,7 @@ import {
   NgOptimizedImage,
   isPlatformBrowser,
 } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 // Models
 import { IArtist } from '@models/artist';
@@ -14,6 +14,7 @@ import { HomeService } from '@services/home.service';
   selector: 'app-artist-detail',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './artist-detail.component.html',
   styleUrl: './artist-detail.component.scss',
 })
