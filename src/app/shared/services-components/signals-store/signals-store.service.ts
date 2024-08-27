@@ -1,8 +1,8 @@
-import { Injectable, Signal, computed, signal } from '@angular/core';
+import { Signal, computed, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 export class SignalsStoreService<T> {
 
   readonly state = signal({} as T);

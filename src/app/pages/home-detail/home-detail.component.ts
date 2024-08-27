@@ -3,8 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  InputSignal,
   OnInit,
   WritableSignal,
+  input,
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -26,7 +28,8 @@ import { CardComponent } from '../../shared/components/card/card.component';
   styleUrl: './home-detail.component.scss',
 })
 export class HomeDetailComponent implements OnInit {
-  @Input() id = '';
+  // @Input() id = '';
+  public id: InputSignal<string> = input.required<string>();
 
   public dataAlbum: WritableSignal<Array<Track>> = signal([]);
   public title: WritableSignal<any> = signal('');
@@ -40,8 +43,8 @@ export class HomeDetailComponent implements OnInit {
   ngOnInit(): void {
     this.title.set(this.homeDetailService.get().title);
 
-    if (this.id) {
-      this.getAlbum(this.id);
+    if (this.id()) {
+      this.getAlbum(this.id());
     }
   }
 
@@ -55,9 +58,6 @@ export class HomeDetailComponent implements OnInit {
         this.router.navigateByUrl('');
       }
     });
-
-
-
     // this.router.navigateByUrl('/');
   }
 }
