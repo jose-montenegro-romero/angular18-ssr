@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 // Environments
 import { environment } from '@environments/environment';
-import { Observable } from 'rxjs';
 
 interface IAuth {
   access_token: string;
@@ -14,7 +14,7 @@ interface IAuth {
   providedIn: 'root',
 })
 export class SpotifyAuthService {
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   getAccessToken(): Observable<IAuth> {
     const url: string = 'https://accounts.spotify.com/api/token';
@@ -34,7 +34,11 @@ export class SpotifyAuthService {
 
     return this.httpclient.post<IAuth>(url, encodedBody, {
       headers: httpHeaders,
-    });
+    }).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
 
     // const res = await lastValueFrom(
     //   this.httpclient.post<IAuth>(url, encodedBody, { headers: httpHeaders })

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 // Services components
 import { HomeDetailService } from '@services-components/home-detail/home-detail.service';
@@ -9,6 +9,7 @@ import { HomeService } from '@services/home.service';
 import { Album } from '@models/album';
 // Components
 import { CardDetailComponent } from '../../shared/components/card-detail/card-detail.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -18,23 +19,14 @@ import { CardDetailComponent } from '../../shared/components/card-detail/card-de
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
-  public dataAlbums: WritableSignal<Array<Album>> = signal([]);
+export class HomeComponent {
 
-  constructor(
-    private homeService: HomeService,
-    private homeDetailService: HomeDetailService
-  ) { }
+  // Inject
+  private homeService = inject(HomeService);
+  private homeDetailService = inject(HomeDetailService);
 
-  ngOnInit(): void {
-    this.getAlbums();
-  }
-
-  getAlbums(): void {
-    this.homeService.getAlbumsApi().subscribe((data: Array<Album>) => {
-      this.dataAlbums.set(data);
-    });
-  }
+  //Data
+  public dataAlbums: Signal<Array<Album>> = toSignal(this.homeService.getAlbumsApi(), { initialValue: [] });
 
   redirectCardDetail(event: any): void {
     this.homeDetailService.set({ id: event.id, title: event.title });
