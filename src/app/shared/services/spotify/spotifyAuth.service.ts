@@ -17,7 +17,7 @@ export class SpotifyAuthService {
   constructor(private httpclient: HttpClient) { }
 
   getAccessToken(): Observable<IAuth> {
-    const url: string = 'https://accounts.spotify.com/api/token';
+    const url = 'https://accounts.spotify.com/api/token';
 
     const encodedBody = new HttpParams({
       fromObject: {

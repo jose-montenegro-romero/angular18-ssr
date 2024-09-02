@@ -1,6 +1,4 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { CookiesService } from '@services/cookies/cookies.service';
+import { CanActivateFn } from '@angular/router';
 
 export const loginGuard: CanActivateFn = (route, state) => {
   // const ssrCookieService = inject(CookiesService);

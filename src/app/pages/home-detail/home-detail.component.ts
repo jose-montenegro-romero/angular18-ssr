@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   InputSignal,
   OnInit,
   WritableSignal,
@@ -31,14 +30,14 @@ export class HomeDetailComponent implements OnInit {
   // @Input() id = '';
   public id: InputSignal<string> = input.required<string>();
 
-  public dataAlbum: WritableSignal<Array<Track>> = signal([]);
-  public title: WritableSignal<any> = signal('');
+  public dataAlbum: WritableSignal<Track[]> = signal([]);
+  public title: WritableSignal<string | undefined> = signal('');
 
   constructor(
     private homeService: HomeService,
     private homeDetailService: HomeDetailService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.title.set(this.homeDetailService.get().title);
@@ -50,13 +49,13 @@ export class HomeDetailComponent implements OnInit {
 
   getAlbum(id: string) {
     this.homeService.getAlbumApi(id).subscribe({
-      next: (data: Array<Track>) => {
+      next: (data: Track[]) => {
         this.dataAlbum.set(data);
       },
       error: (err) => {
         console.log(err);
         this.router.navigateByUrl('');
-      }
+      },
     });
     // this.router.navigateByUrl('/');
   }

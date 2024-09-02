@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, Signal, WritableSignal, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 // Services components
 import { HomeDetailService } from '@services-components/home-detail/home-detail.service';
@@ -26,7 +26,7 @@ export class HomeComponent {
   private homeDetailService = inject(HomeDetailService);
 
   //Data
-  public dataAlbums: Signal<Array<Album>> = toSignal(this.homeService.getAlbumsApi(), { initialValue: [] });
+  public dataAlbums: Signal<Album[]> = toSignal(this.homeService.getAlbumsApi(), { initialValue: [] });
 
   redirectCardDetail(event: any): void {
     this.homeDetailService.set({ id: event.id, title: event.title });

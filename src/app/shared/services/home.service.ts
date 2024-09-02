@@ -12,7 +12,7 @@ export class HomeService {
 
   getAlbumsApi(): Observable<Album[]> {
     return this.httpclient
-      .get<Array<Album>>(
+      .get<Album[]>(
         'https://api.spotify.com/v1/browse/new-releases?country=CO'
       )
       .pipe(
@@ -24,7 +24,7 @@ export class HomeService {
 
   getAlbumApi(id: string): Observable<Track[]> {
     return this.httpclient
-      .get<Array<Track>>(`https://api.spotify.com/v1/albums/${id}`)
+      .get<Track[]>(`https://api.spotify.com/v1/albums/${id}`)
       .pipe(
         map((response: any) => {
           return response.tracks.items;
