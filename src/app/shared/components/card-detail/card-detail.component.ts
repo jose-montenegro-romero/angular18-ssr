@@ -2,10 +2,9 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   InputSignal,
-  Output,
   input,
+  output,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -24,8 +23,7 @@ export class CardDetailComponent {
   public title: InputSignal<string> = input.required<string>();
   public priorityImage: InputSignal<boolean> = input<boolean>(false);
 
-  @Output() redirectUrl: EventEmitter<{ title: string; id: string }> =
-    new EventEmitter<{ title: string; id: string }>();
+  public redirectUrl = output<{ title: string; id: string }>();
 
   redirectRouterLink() {
     this.redirectUrl.emit({ title: this.title(), id: this.id() });
